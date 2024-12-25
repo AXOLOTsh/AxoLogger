@@ -1,22 +1,43 @@
 ﻿namespace AxoLogger {
+    /// <summary>
+    /// Represents the log severity level.
+    /// </summary>
     public enum LogLevel { Info, Debug, Error, Warning }
+    /// <summary>
+    /// Represents the implementation of the simplest log.
+    /// </summary>
     public class Log {
+        /// <summary>
+        /// Returns the log message.
+        /// </summary>
         public string Message { get; private set; }
+        /// <summary>
+        /// Returns the name of the log creator.
+        /// </summary>
         public string Sender { get; private set; }
+        /// <summary>
+        /// Returns the log severity level.
+        /// </summary>
         public LogLevel Level { get; private set; }
+        /// <summary>
+        /// Returns the time the log was created.
+        /// </summary>
         public DateTime CreationTime { get; private set; }
 
         public Log() { }
-        public Log(string log, string sender = "", LogLevel level = LogLevel.Info) {
-            Message = log;
+        /// <param name="name">Log message.</param>
+        /// <param name="sender">Name of the log creator.</param>
+        /// <param name="level">Log severity level.</param>
+        public Log(string name, string sender = "", LogLevel level = LogLevel.Info) {
+            Message = name;
             Sender = sender;
             Level = level;
 
             CreationTime = DateTime.Now;
         }
-
+        /// <returns>Full log message</returns>
         public override string ToString() => GetFullLogMessage();
-
+        /// <returns>Full log message</returns>
         public string GetFullLogMessage() => $"[green]{CreationTime}[/] - {GetLogLevelString()} [gray]{GetSender()}:[/] {Message}";
 
         private string GetSender() {
